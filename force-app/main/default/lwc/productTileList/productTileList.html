@@ -1,0 +1,30 @@
+<template>
+    <div class="slds-card slds-var-p-around_x-small my-card" >
+        <template if:true={products.data}>
+            <div class="content">
+                <template for:each={products.data} for:item="product">
+                    <c-product-tile
+                        key={product.Id}
+                        product={product}
+                        onselect={productSelectHandler}
+                        class="slds-var-m-around_x-small" >
+                    </c-product-tile>
+                </template>
+            </div>
+            <c-paginator
+                page-number={pageNumber}
+                page-size={products.data.pageSize}
+                total-item-count={products.data.totalItemCount}
+                onprevious={previousPageHandler}
+                onnext={nextPageHandler} > 
+            </c-paginator>
+        </template>
+
+        <template if:false={products.data}>
+            <c-placeholder
+                message="There are no products matching your current selection" >
+            </c-placeholder>
+        </template>
+
+    </div>
+</template>
